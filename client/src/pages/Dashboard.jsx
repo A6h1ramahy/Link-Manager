@@ -20,6 +20,7 @@ const Dashboard = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [view, setView] = useState('grid'); // 'grid' | 'graph'
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -81,8 +82,13 @@ const Dashboard = () => {
       <GroupSidebar
         groups={groups}
         selectedGroup={selectedGroup}
-        onSelectGroup={setSelectedGroup}
+        onSelectGroup={(id) => {
+          setSelectedGroup(id);
+          setIsSidebarOpen(false);
+        }}
         onRefresh={fetchData}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
 
       <div className="dashboard-main">
@@ -95,6 +101,14 @@ const Dashboard = () => {
           </div>
 
           <div className="header-right">
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+              className="btn-icon mobile-only" 
+              title="Menu"
+            >
+              {isSidebarOpen ? '✕' : '☰'}
+            </button>
+
             <button onClick={toggleTheme} className="btn-icon" title="Toggle theme">
               {theme === 'dark' ? '☀️' : '🌙'}
             </button>

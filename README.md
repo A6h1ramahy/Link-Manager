@@ -17,7 +17,7 @@ A beautiful, organized link saver with automatic metadata extraction, search, an
 ### 🎨 Premium Design
 - **Glassmorphism UI**: Modern, beautiful interface with smooth animations
 - **Dark/Light Themes**: Switch between themes with full persistence
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
+- **Responsive Design**: Mobile-first design with a smart sidebar toggle for seamless mobile usage
 
 ## 🚀 Getting Started
 

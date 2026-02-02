@@ -141,6 +141,15 @@
   color: var(--text-muted);
 }
 
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .group-sidebar {
@@ -152,5 +161,10 @@
 
   .group-sidebar.open {
     left: 0;
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebar-overlay.show {
+    display: block;
   }
 }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { groupsAPI } from '../services/api';
 import './GroupSidebar.css';
 
-const GroupSidebar = ({ groups, selectedGroup, onSelectGroup, onRefresh }) => {
+const GroupSidebar = ({ groups, selectedGroup, onSelectGroup, onRefresh, isOpen, onClose }) => {
   const [showAddGroup, setShowAddGroup] = useState(false);
   const [newGroupName, setNewGroupName] = useState('');
   const [newGroupIcon, setNewGroupIcon] = useState('📁');
@@ -33,7 +33,9 @@ const GroupSidebar = ({ groups, selectedGroup, onSelectGroup, onRefresh }) => {
   const colorOptions = ['#6366f1', '#8b5cf6', '#ec4899', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
 
   return (
-    <aside className="group-sidebar">
+    <>
+      <div className={`sidebar-overlay ${isOpen ? 'show' : ''}`} onClick={onClose} />
+      <aside className={`group-sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
         <h2>Collections</h2>
         <button
@@ -124,6 +126,7 @@ const GroupSidebar = ({ groups, selectedGroup, onSelectGroup, onRefresh }) => {
         ))}
       </nav>
     </aside>
+    </>
   );
 };
 

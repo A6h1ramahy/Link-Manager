@@ -40,19 +40,21 @@ app.use('/api/links', linkRoutes);
 app.use('/api/groups', groupRoutes);
 
 // --- Deployment Setup ---
-if (process.env.NODE_ENV === 'production') {
-  // Serve static files from the React app
-  const clientBuildPath = path.join(__dirname, '../../client/dist');
-  app.use(express.static(clientBuildPath));
+// Serve static files from the React app
+const clientBuildPath = path.join(__dirname, '../../client/dist');
+app.use(express.static(clientBuildPath));
 
-  // Handle SPA routing - serve index.html for any non-API routes
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) {
-      return next();
+// Handle SPA routing - serve index.html for any non-API routes
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return next();
+  }
+  res.sendFile(path.join(clientBuildPath, 'index.html'), (err) => {
+    if (err) {
+      next();
     }
-    res.sendFile(path.join(clientBuildPath, 'index.html'));
   });
-}
+});
 // ------------------------
 
 // Health check route

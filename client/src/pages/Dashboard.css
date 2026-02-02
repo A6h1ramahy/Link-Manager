@@ -158,4 +158,12 @@
   .controls-right {
     justify-content: space-between;
   }
+
+  .mobile-only {
+    display: flex !important;
+  }
+}
+
+.mobile-only {
+  display: none;
 }
