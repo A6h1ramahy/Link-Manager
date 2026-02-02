@@ -170,7 +170,7 @@
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--border-radius-sm);
-  color: #ffffff;
+  color: var(--text-primary);
   cursor: pointer;
   transition: all var(--transition-base);
 }
