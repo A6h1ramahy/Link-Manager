@@ -133,12 +133,34 @@
   white-space: nowrap;
 }
 
-.group-count {
-  padding: 0.125rem 0.5rem;
-  background: var(--glass-bg);
-  border-radius: 999px;
-  font-size: var(--font-size-xs);
+.group-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.btn-delete-group {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-hover);
+  border: none;
+  border-radius: 50%;
   color: var(--text-muted);
+  font-size: 10px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.group-item:hover .btn-delete-group {
+  display: flex;
+}
+
+.btn-delete-group:hover {
+  background: var(--error);
+  color: white;
 }
 
 .sidebar-overlay {

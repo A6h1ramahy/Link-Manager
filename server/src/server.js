@@ -41,21 +41,26 @@ app.use('/api/groups', groupRoutes);
 
 // --- Deployment Setup ---
 // Serve static files from the React app
-const clientBuildPath = path.join(__dirname, '../../client/dist');
+const clientBuildPath = path.resolve(__dirname, '../../client/dist');
 app.use(express.static(clientBuildPath));
 
 // Handle SPA routing - serve index.html for any non-API routes
 app.get('*', (req, res, next) => {
+  // Skip API routes
   if (req.path.startsWith('/api')) {
     return next();
   }
-  res.sendFile(path.join(clientBuildPath, 'index.html'), (err) => {
+  
+  const indexPath = path.join(clientBuildPath, 'index.html');
+  res.sendFile(indexPath, (err) => {
     if (err) {
+      console.error(`SPA Fallback Error: Could not serve index.html at ${indexPath}. Ensure the frontend is built.`);
       next();
     }
   });
 });
 // ------------------------
+
 
 // Health check route
 app.get('/api/health', (req, res) => {

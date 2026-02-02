@@ -29,6 +29,21 @@ const GroupSidebar = ({ groups, selectedGroup, onSelectGroup, onRefresh, isOpen,
     }
   };
 
+  const handleDeleteGroup = async (e, groupId, groupName) => {
+    e.stopPropagation();
+    if (window.confirm(`Are you sure you want to delete "${groupName}"? Links in this group will become uncollected.`)) {
+      try {
+        await groupsAPI.delete(groupId);
+        if (selectedGroup === groupId) {
+          onSelectGroup('all');
+        }
+        onRefresh();
+      } catch (error) {
+        console.error('Failed to delete group:', error);
+      }
+    }
+  };
+
   const iconOptions = ['📁', '💼', '🎯', '📚', '🎨', '💡', '🚀', '⭐', '🔥', '💻'];
   const colorOptions = ['#6366f1', '#8b5cf6', '#ec4899', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
 
@@ -119,9 +134,18 @@ const GroupSidebar = ({ groups, selectedGroup, onSelectGroup, onRefresh, isOpen,
               {group.icon}
             </span>
             <span className="group-name">{group.name}</span>
-            {group.linkCount > 0 && (
-              <span className="group-count">{group.linkCount}</span>
-            )}
+            <div className="group-actions">
+              {group.linkCount > 0 && (
+                <span className="group-count">{group.linkCount}</span>
+              )}
+              <button
+                className="btn-delete-group"
+                onClick={(e) => handleDeleteGroup(e, group._id, group.name)}
+                title="Delete group"
+              >
+                ✕
+              </button>
+            </div>
           </button>
         ))}
       </nav>

@@ -18,6 +18,7 @@ const KnowledgeGraph = ({ links }) => {
     const nodes = links.map((link, i) => ({
       id: link._id,
       title: link.title,
+      name: link.name,
       url: link.url,
       domain: link.domain,
       group: link.group,
@@ -92,7 +93,7 @@ const KnowledgeGraph = ({ links }) => {
     // Add text labels
     node
       .append('text')
-      .text((d) => d.title.substring(0, 20))
+      .text((d) => (d.name || d.domain || d.title || '').substring(0, 20))
       .attr('text-anchor', 'middle')
       .attr('dy', 35)
       .attr('class', 'node-label');

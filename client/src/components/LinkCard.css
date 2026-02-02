@@ -35,7 +35,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  trans ition: transform var(--transition-slow);
+  transition: transform var(--transition-slow);
 }
 
 .link-preview:hover img {
@@ -170,6 +170,7 @@
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--border-radius-sm);
+  color: #ffffff;
   cursor: pointer;
   transition: all var(--transition-base);
 }
